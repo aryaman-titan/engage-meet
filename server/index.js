@@ -13,15 +13,6 @@ app.get("/api/greeting", (req, res) => {
   res.json({ greeting: `Hello ${name}!` });
 });
 
-app.get("/video/token", (req, res) => {
-  const identity = req.query.identity;
-  const room = req.query.room;
-  const token = videoToken(identity, room, config);
-  res.json({
-    token: token.toJwt(),
-  });
-});
-
 app.post("/video/token", (req, res) => {
   const identity = req.body.identity;
   const room = req.body.room;
