@@ -8,7 +8,7 @@ export interface StateContextType {
     error: TwilioError | Error | null;
     setError(error: TwilioError | Error | null): void;
     getToken(name: string, room: string, passcode?: string): Promise<{ room_type: RoomType; token: string }>;
-    user?: { displayName: undefined; photoURL: undefined; passcode?: string };
+    user?: null | { displayName: undefined; photoURL: undefined; passcode?: string };
     signIn?(passcode?: string): Promise<void>;
     signOut?(): Promise<void>;
     isAuthReady?: boolean;

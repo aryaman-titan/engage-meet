@@ -1,35 +1,40 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import App from './App';
-import './types'
-import theme from './theme'
-
 import { CssBaseline } from '@material-ui/core';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 
+import App from './App';
+import AppStateProvider, { useAppState } from './state';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
-
-import NotSupportedWarning from './components/NotSupportedWarning/NotSupportedWarning';
+import ErrorDialog from './components/ErrorDialog/ErrorDialog';
+import LoginPage from './components/LoginPage/LoginPage';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import theme from './theme';
+import './types';
+import { ChatProvider } from './components/ChatProvider';
+import { VideoProvider } from './components/VideoProvider';
+import useConnectionOptions from './utils/useConnectionOptions/useConnectionOptions';
+import UnsupportedBrowserWarning from './components/UnsupportedBrowserWarning/UnsupportedBrowserWarning';
 
 const VideoApp = () => {
-    const { error, setError } = useAppState();
-    const connectionOptions = useConnectionOptions();
-  
-    return (
-      <VideoProvider options={connectionOptions} onError={setError}>
-        <ErrorDialog dismissError={() => setError(null)} error={error} />
-        <ChatProvider>
-          <App />
-        </ChatProvider>
-      </VideoProvider>
-    );
-  };
+  const { error, setError } = useAppState();
+  const connectionOptions = useConnectionOptions();
+
+  return (
+    <VideoProvider options={connectionOptions} onError={setError}>
+      <ErrorDialog dismissError={() => setError(null)} error={error} />
+      <ChatProvider>
+        <App />
+      </ChatProvider>
+    </VideoProvider>
+  );
+};
 
 ReactDOM.render(
-    <MuiThemeProvider theme={theme}>
+  <MuiThemeProvider theme={theme}>
     <CssBaseline />
-    <NotSupportedWarning>
+    <UnsupportedBrowserWarning>
       <Router>
         <AppStateProvider>
           <Switch>
@@ -46,7 +51,7 @@ ReactDOM.render(
           </Switch>
         </AppStateProvider>
       </Router>
-    </NotSupportedWarning>
+    </UnsupportedBrowserWarning>
   </MuiThemeProvider>,
   document.getElementById('root')
 );
