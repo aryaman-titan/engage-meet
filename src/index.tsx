@@ -8,7 +8,6 @@ import App from './App';
 import AppStateProvider, { useAppState } from './state';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import ErrorDialog from './components/ErrorDialog/ErrorDialog';
-import LoginPage from './components/LoginPage/LoginPage';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import theme from './theme';
 import './types';
@@ -45,7 +44,7 @@ ReactDOM.render(
               <VideoApp />
             </PrivateRoute>
             <Route path="/login">
-              <LoginPage />
+              <VideoApp />
             </Route>
             <Redirect to="/" />
           </Switch>
