@@ -42,7 +42,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint src server",
-    "server": "ts-node -T -P server/tsconfig.json server/index.ts"
+    "server": "ts-node -T -P server/tsconfig.json server/index.ts",
+    "postinstall": "npm:build"
   },
   "eslintConfig": {
     "extends": "react-app",
@@ -53,7 +54,6 @@
       ]
     }
   },
-  "proxy": "http://localhost:8081/",
   "browserslist": {
     "production": [
       ">0.2%",
