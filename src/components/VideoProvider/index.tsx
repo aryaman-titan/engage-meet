@@ -11,13 +11,6 @@ import useRestartAudioTrackOnDeviceChange from './useRestartAudioTrackOnDeviceCh
 import useRoom from './useRoom/useRoom';
 import useScreenShareToggle from './useScreenShareToggle/useScreenShareToggle';
 
-/*
- *  The hooks used by the VideoProvider component are different than the hooks found in the 'hooks/' directory. The hooks
- *  in the 'hooks/' directory can be used anywhere in a video application, and they can be used any number of times.
- *  the hooks in the 'VideoProvider/' directory are intended to be used by the VideoProvider component only. Using these hooks
- *  elsewhere in the application may cause problems as these hooks should not be used more than once in an application.
- */
-
 export interface IVideoContext {
   room: Room | null;
   localTracks: (LocalAudioTrack | LocalVideoTrack)[];
