@@ -42,8 +42,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint src server",
-    "server": "ts-node -T -P server/tsconfig.json server/index.ts",
-    "postinstall": "npm:build"
+    "server": "ts-node -T -P server/tsconfig.json server/index.ts"
   },
   "eslintConfig": {
     "extends": "react-app",
