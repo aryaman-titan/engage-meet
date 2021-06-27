@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.js": "/static/js/main.948d1721.chunk.js",
-    "main.js.map": "/static/js/main.948d1721.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.bfcce43f.js",
-    "runtime-main.js.map": "/static/js/runtime-main.bfcce43f.js.map",
-    "static/js/2.5430400d.chunk.js": "/static/js/2.5430400d.chunk.js",
-    "static/js/2.5430400d.chunk.js.map": "/static/js/2.5430400d.chunk.js.map",
-    "index.html": "/index.html",
-    "static/js/2.5430400d.chunk.js.LICENSE.txt": "/static/js/2.5430400d.chunk.js.LICENSE.txt"
+    "main.js": "/engage-meet/static/js/main.e65379e2.chunk.js",
+    "main.js.map": "/engage-meet/static/js/main.e65379e2.chunk.js.map",
+    "runtime-main.js": "/engage-meet/static/js/runtime-main.9b539ad5.js",
+    "runtime-main.js.map": "/engage-meet/static/js/runtime-main.9b539ad5.js.map",
+    "static/js/2.b44ebf65.chunk.js": "/engage-meet/static/js/2.b44ebf65.chunk.js",
+    "static/js/2.b44ebf65.chunk.js.map": "/engage-meet/static/js/2.b44ebf65.chunk.js.map",
+    "index.html": "/engage-meet/index.html",
+    "static/js/2.b44ebf65.chunk.js.LICENSE.txt": "/engage-meet/static/js/2.b44ebf65.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.bfcce43f.js",
-    "static/js/2.5430400d.chunk.js",
-    "static/js/main.948d1721.chunk.js"
+    "static/js/runtime-main.9b539ad5.js",
+    "static/js/2.b44ebf65.chunk.js",
+    "static/js/main.e65379e2.chunk.js"
   ]
 }
