@@ -2,7 +2,6 @@
   "name": "engage-meet",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://aryaman-titan.github.io/engage-meet/",
   "dependencies": {
     "@material-ui/core": "^4.9.1",
     "@material-ui/icons": "^4.9.1",
