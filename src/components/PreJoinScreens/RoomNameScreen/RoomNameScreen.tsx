@@ -7,6 +7,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginBottom: '1em',
   },
   inputContainer: {
+    color: 'white',
     display: 'flex',
     justifyContent: 'space-between',
     margin: '1.5em 0 3.5em',

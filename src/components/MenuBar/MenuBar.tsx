@@ -12,96 +12,107 @@ import ToggleAudioButton from '../Buttons/ToggleAudioButton/ToggleAudioButton';
 import ToggleChatButton from '../Buttons/ToggleChatButton/ToggleChatButton';
 import ToggleVideoButton from '../Buttons/ToggleVideoButton/ToggleVideoButton';
 import ToggleScreenShareButton from '../Buttons/ToogleScreenShareButton/ToggleScreenShareButton';
+import FileCopyIcon from '@material-ui/icons/FileCopy';
+import IconButton from '@material-ui/core/IconButton';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    container: {
-      backgroundColor: theme.palette.background.default,
-      bottom: 0,
-      left: 0,
-      right: 0,
-      height: `${theme.footerHeight}px`,
-      position: 'fixed',
-      display: 'flex',
-      padding: '0 1.43em',
-      zIndex: 10,
-      [theme.breakpoints.down('sm')]: {
-        height: `${theme.mobileFooterHeight}px`,
-        padding: 0,
-      },
-    },
-    screenShareBanner: {
-      position: 'fixed',
-      zIndex: 8,
-      bottom: `${theme.footerHeight}px`,
-      left: 0,
-      right: 0,
-      height: '104px',
-      background: 'rgba(0, 0, 0, 0.5)',
-      '& h6': {
-        color: 'white',
-      },
-      '& button': {
-        background: 'white',
-        color: theme.brand,
-        border: `2px solid ${theme.brand}`,
-        margin: '0 2em',
-        '&:hover': {
-          color: '#600101',
-          border: `2px solid #600101`,
-          background: '#FFE9E7',
+    createStyles({
+        container: {
+            backgroundColor: theme.palette.background.default,
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: `${theme.footerHeight}px`,
+            position: 'fixed',
+            display: 'flex',
+            padding: '0 1.43em',
+            zIndex: 10,
+            [theme.breakpoints.down('sm')]: {
+                height: `${theme.mobileFooterHeight}px`,
+                padding: 0,
+            },
         },
-      },
-    },
-    hideMobile: {
-      display: 'initial',
-      [theme.breakpoints.down('sm')]: {
-        display: 'none',
-      },
-    },
-  })
+        screenShareBanner: {
+            position: 'fixed',
+            zIndex: 8,
+            bottom: `${theme.footerHeight}px`,
+            left: 0,
+            right: 0,
+            height: '104px',
+            background: 'rgba(0, 0, 0, 0.5)',
+            '& h6': {
+                color: 'white',
+            },
+            '& button': {
+                background: 'white',
+                color: theme.brand,
+                border: `2px solid ${theme.brand}`,
+                margin: '0 2em',
+                '&:hover': {
+                    color: '#600101',
+                    border: `2px solid #600101`,
+                    background: '#FFE9E7',
+                },
+            },
+        },
+        hideMobile: {
+            display: 'initial',
+            [theme.breakpoints.down('sm')]: {
+                display: 'none',
+            },
+        },
+    })
 );
 
 export default function MenuBar() {
-  const classes = useStyles();
-  const { isSharingScreen, toggleScreenShare } = useVideoContext();
-  const roomState = useRoomState();
-  const isReconnecting = roomState === 'reconnecting';
-  const { room } = useVideoContext();
+    const classes = useStyles();
+    const { isSharingScreen, toggleScreenShare } = useVideoContext();
+    const roomState = useRoomState();
+    const isReconnecting = roomState === 'reconnecting';
+    const { room } = useVideoContext();
 
-  return (
-    <>
-      {isSharingScreen && (
-        <Grid container justify="center" alignItems="center" className={classes.screenShareBanner}>
-          <Typography variant="h6">You are sharing your screen</Typography>
-          <Button onClick={() => toggleScreenShare()}>Stop Sharing</Button>
-        </Grid>
-      )}
-      <footer className={classes.container}>
-        <Grid container justify="space-around" alignItems="center">
-          <Hidden smDown>
-            <Grid style={{ flex: 1 }}>
-              <Typography variant="body1">{room!.name}</Typography>
-            </Grid>
-          </Hidden>
-          <Grid item>
-            <Grid container justify="center">
-              <ToggleAudioButton disabled={isReconnecting} />
-              <ToggleVideoButton disabled={isReconnecting} />
-              {!isSharingScreen && !isMobile && <ToggleScreenShareButton disabled={isReconnecting} />}
-              {process.env.REACT_APP_DISABLE_TWILIO_CONVERSATIONS !== 'true' && <ToggleChatButton />}
-            </Grid>
-          </Grid>
-          <Hidden smDown>
-            <Grid style={{ flex: 1 }}>
-              <Grid container justify="flex-end">
-                <Menu />
-                <EndCallButton />
-              </Grid>
-            </Grid>
-          </Hidden>
-        </Grid>
-      </footer>
-    </>
-  );
+    return (
+        <>
+            {isSharingScreen && (
+                <Grid container justify="center" alignItems="center" className={classes.screenShareBanner}>
+                    <Typography variant="h6">You are sharing your screen</Typography>
+                    <Button onClick={() => toggleScreenShare()}>Stop Sharing</Button>
+                </Grid>
+            )}
+            <footer className={classes.container}>
+                <Grid container justify="space-around" alignItems="center">
+                    <Hidden smDown>
+                        <Grid style={{ flex: 1 }}>
+                            <Typography variant="body1">
+                                <Tooltip title="Copy to clipboard">
+                                    <IconButton
+                                     aria-label="delete"
+                                     onClick={() => {navigator.clipboard.writeText(window.location.href)}}>
+                                        <FileCopyIcon color="primary" /> {room!.name}
+                                    </IconButton>
+                                </Tooltip>
+                            </Typography>
+                        </Grid>
+                    </Hidden>
+                    <Grid item>
+                        <Grid container justify="center">
+                            <ToggleAudioButton disabled={isReconnecting} />
+                            <ToggleVideoButton disabled={isReconnecting} />
+                            {!isSharingScreen && !isMobile && <ToggleScreenShareButton disabled={isReconnecting} />}
+                            {process.env.REACT_APP_DISABLE_TWILIO_CONVERSATIONS !== 'true' && <ToggleChatButton />}
+                        </Grid>
+                    </Grid>
+                    <Hidden smDown>
+                        <Grid style={{ flex: 1 }}>
+                            <Grid container justify="flex-end">
+                                <Menu />
+                                <EndCallButton />
+                            </Grid>
+                        </Grid>
+                    </Hidden>
+                </Grid>
+            </footer>
+        </>
+    );
 }

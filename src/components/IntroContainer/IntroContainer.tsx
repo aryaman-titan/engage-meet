@@ -1,6 +1,5 @@
 import React from 'react';
 import { makeStyles, Theme, Typography } from '@material-ui/core';
-import Swoosh from './swoosh';
 import VideoLogo from './VideoLogo';
 import './stars.css';
 
@@ -9,7 +8,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    background: 'rgb(56,56,56)',
+    background: 'rgb(85, 43, 106)',
     height: '100%',
   },
   container: {
@@ -38,8 +37,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundImage: Swoosh,
+    // backgroundImage: Swoosh,
     backgroundSize: 'cover',
+    background: 'rgba(0, 0, 0, 0.4)',
     width: '296px',
     [theme.breakpoints.down('sm')]: {
       width: '100%',
