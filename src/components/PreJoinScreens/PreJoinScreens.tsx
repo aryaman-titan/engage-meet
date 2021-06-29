@@ -6,6 +6,7 @@ import RoomNameScreen from './RoomNameScreen/RoomNameScreen';
 import { useAppState } from '../../state';
 import { useParams } from 'react-router-dom';
 import useVideoContext from '../../hooks/useVideoContext/useVideoContext';
+import { nanoid } from "nanoid";
 
 export enum Steps {
   roomNameStep,
@@ -22,6 +23,12 @@ export default function PreJoinScreens() {
   const [roomName, setRoomName] = useState<string>('');
 
   const [mediaError, setMediaError] = useState<Error>();
+
+  useEffect(() => {
+    if(!roomName){
+        setRoomName(nanoid(12));
+    }
+  }, [roomName])
 
   useEffect(() => {
     if (URLRoomName) {
@@ -44,10 +51,7 @@ export default function PreJoinScreens() {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // If this app is deployed as a twilio function, don't change the URL because routing isn't supported.
-    if (!window.location.origin.includes('twil.io')) {
-      window.history.replaceState(null, '', window.encodeURI(`/room/${roomName}${window.location.search || ''}`));
-    }
+    window.history.replaceState(null, '', window.encodeURI(`/room/${roomName}${window.location.search || ''}`));
     setStep(Steps.deviceSelectionStep);
   };
 
