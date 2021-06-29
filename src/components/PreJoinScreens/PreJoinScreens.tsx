@@ -25,10 +25,10 @@ export default function PreJoinScreens() {
   const [mediaError, setMediaError] = useState<Error>();
 
   useEffect(() => {
-    if(!roomName){
+    if(!roomName && !URLRoomName){
         setRoomName(nanoid(12));
     }
-  }, [roomName])
+  }, [roomName, URLRoomName]);
 
   useEffect(() => {
     if (URLRoomName) {
