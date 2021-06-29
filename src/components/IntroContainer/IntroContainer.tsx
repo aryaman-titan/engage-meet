@@ -2,13 +2,14 @@ import React from 'react';
 import { makeStyles, Theme, Typography } from '@material-ui/core';
 import Swoosh from './swoosh';
 import VideoLogo from './VideoLogo';
+import './stars.css';
 
 const useStyles = makeStyles((theme: Theme) => ({
   background: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    background: 'rgb(40, 42, 43)',
+    background: 'rgb(4, 42, 43)',
     height: '100%',
   },
   container: {
@@ -94,6 +95,9 @@ const IntroContainer = (props: IntroContainerProps) => {
 
   return (
     <div className={classes.background}>
+        <div id="stars"></div>
+        <div id="stars2"></div>
+        <div id="stars3"></div>
       <div className={classes.container}>
         <div className={classes.innerContainer}>
           <div className={classes.swooshContainer}>
