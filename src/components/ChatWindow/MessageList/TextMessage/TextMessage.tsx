@@ -52,7 +52,11 @@ export default function TextMessage({ body, isLocalParticipant }: TextMessagePro
   const classes = useStyles();
 
   return (
-    <div>
+    <div style={{
+        display: 'flex',
+        justifyContent: isLocalParticipant ?
+            'flex-end' : 'flex-start'
+    }}>
       <div
         className={clsx(classes.messageContainer, {
           [classes.isLocalParticipant]: isLocalParticipant,
