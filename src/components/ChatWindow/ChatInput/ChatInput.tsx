@@ -137,11 +137,7 @@ export default function ChatInput({ conversation, isChatWindowOpen }: ChatInputP
         handleClose={() => setFileSendError(null)}
       />
       <div className={clsx(classes.textAreaContainer, { [classes.isTextareaFocused]: isTextareaFocused })}>
-        {/* 
-        Here we add the "isTextareaFocused" class when the user is focused on the TextareaAutosize component.
-        This helps to ensure a consistent appearance across all browsers. Adding padding to the TextareaAutosize
-        component does not work well in Firefox. See: https://github.com/twilio/twilio-video-app-react/issues/498
-        */}
+        
         <TextareaAutosize
           rowsMin={1}
           rowsMax={3}
@@ -159,8 +155,7 @@ export default function ChatInput({ conversation, isChatWindowOpen }: ChatInputP
       </div>
 
       <Grid container alignItems="flex-end" justify="flex-end" wrap="nowrap">
-        {/* Since the file input element is invisible, we can hardcode an empty string as its value.
-        This allows users to upload the same file multiple times. */}
+        
         <input
           ref={fileInputRef}
           type="file"

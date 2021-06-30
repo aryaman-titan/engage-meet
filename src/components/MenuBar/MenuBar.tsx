@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
 import Button from '@material-ui/core/Button';
@@ -15,6 +15,7 @@ import ToggleScreenShareButton from '../Buttons/ToogleScreenShareButton/ToggleSc
 import FileCopyIcon from '@material-ui/icons/FileCopy';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
+import Snackbar from '../Snackbar/Snackbar';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -72,8 +73,22 @@ export default function MenuBar() {
     const isReconnecting = roomState === 'reconnecting';
     const { room } = useVideoContext();
 
+    const [isCopied, setIsCopied] = useState(false);
+
+    const copyToClipboard = () => {
+        navigator.clipboard.writeText(window.location.href);
+        setIsCopied(true);
+    }
+
     return (
         <>
+            <Snackbar
+                open={isCopied}
+                headline="Message"
+                message={"Waiting for the new particpant!"}
+                variant="info"
+                handleClose={() => setIsCopied(false)}
+            />
             {isSharingScreen && (
                 <Grid container justify="center" alignItems="center" className={classes.screenShareBanner}>
                     <Typography variant="h6">You are sharing your screen</Typography>
@@ -87,9 +102,9 @@ export default function MenuBar() {
                             <Typography variant="body1">
                                 <Tooltip title="Copy to clipboard">
                                     <IconButton
-                                     aria-label="delete"
-                                     onClick={() => {navigator.clipboard.writeText(window.location.href)}}>
-                                        <FileCopyIcon color="primary" /> 
+                                        aria-label="delete"
+                                        onClick={copyToClipboard}>
+                                        <FileCopyIcon color="primary" />
                                     </IconButton>
                                 </Tooltip>
                                 {room!.name}
