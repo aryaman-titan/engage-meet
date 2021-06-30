@@ -75,14 +75,12 @@ export class MessageListScrollContainer extends React.Component<
     if (prevState.isScrolledToBottom && hasNewMessages) {
       this.scrollToBottom();
     } else if (hasNewMessages) {
+      this.scrollToBottom();
       const numberOfNewMessages = this.props.messages.length - prevProps.messages.length;
 
       this.setState(previousState => ({
-        // If there's at least one new message, show the 'new message' button:
         showButton: !previousState.isScrolledToBottom,
-        // If 'new message' button is visible,
-        // messageNotificationCount will be the number of previously unread messages + the number of new messages.
-        // Otherwise, messageNotificationCount is set to 1:
+        
         messageNotificationCount: previousState.showButton
           ? previousState.messageNotificationCount + numberOfNewMessages
           : 1,
