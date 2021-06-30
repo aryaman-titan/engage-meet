@@ -100,7 +100,7 @@ export default function MenuBar() {
                             <ToggleAudioButton disabled={isReconnecting} />
                             <ToggleVideoButton disabled={isReconnecting} />
                             {!isSharingScreen && !isMobile && <ToggleScreenShareButton disabled={isReconnecting} />}
-                            {process.env.REACT_APP_DISABLE_TWILIO_CONVERSATIONS !== 'true' && <ToggleChatButton />}
+                            <ToggleChatButton />
                         </Grid>
                     </Grid>
                     <Hidden smDown>
