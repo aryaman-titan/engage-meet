@@ -50,9 +50,9 @@ const useStyles = makeStyles((theme: Theme) =>
                 border: `2px solid ${theme.brand}`,
                 margin: '0 2em',
                 '&:hover': {
-                    color: '#600101',
+                    color: '#080808',
                     border: `2px solid #600101`,
-                    background: '#FFE9E7',
+                    background: '#080808',
                 },
             },
         },
@@ -89,9 +89,10 @@ export default function MenuBar() {
                                     <IconButton
                                      aria-label="delete"
                                      onClick={() => {navigator.clipboard.writeText(window.location.href)}}>
-                                        <FileCopyIcon color="primary" /> {room!.name}
+                                        <FileCopyIcon color="primary" /> 
                                     </IconButton>
                                 </Tooltip>
+                                {room!.name}
                             </Typography>
                         </Grid>
                     </Hidden>
