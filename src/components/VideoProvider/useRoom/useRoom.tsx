@@ -23,8 +23,6 @@ export default function useRoom(localTracks: LocalTrack[], onError: Callback, op
           setRoom(newRoom);
           const disconnect = () => newRoom.disconnect();
 
-          // This app can add up to 13 'participantDisconnected' listeners to the room object, which can trigger
-          // a warning from the EventEmitter object. Here we increase the max listeners to suppress the warning.
           newRoom.setMaxListeners(15);
 
           newRoom.once('disconnected', () => {
@@ -41,9 +39,6 @@ export default function useRoom(localTracks: LocalTrack[], onError: Callback, op
           window.twilioRoom = newRoom;
 
           newRoom.localParticipant.videoTracks.forEach(publication =>
-            // All video tracks are published with 'low' priority because the video track
-            // that is displayed in the 'MainParticipant' component will have it's priority
-            // set to 'high' via track.setPriority()
             publication.setPriority('low')
           );
 

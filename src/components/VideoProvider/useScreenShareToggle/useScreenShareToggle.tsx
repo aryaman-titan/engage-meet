@@ -25,18 +25,14 @@ export default function useScreenShareToggle(room: Room | null, onError: ErrorCa
       .then(stream => {
         const track = stream.getTracks()[0];
 
-        // All video tracks are published with 'low' priority. This works because the video
-        // track that is displayed in the 'MainParticipant' component will have it's priority
-        // set to 'high' via track.setPriority()
         room!.localParticipant
           .publishTrack(track, {
-            name: 'screen', // Tracks can be named to easily find them later
-            priority: 'low', // Priority is set to high by the subscriber when the video track is rendered
+            name: 'screen', 
+            priority: 'low', 
           } as MediaStreamTrackPublishOptions)
           .then(trackPublication => {
             stopScreenShareRef.current = () => {
               room!.localParticipant.unpublishTrack(track);
-              // TODO: remove this if the SDK is updated to emit this event
               room!.localParticipant.emit('trackUnpublished', trackPublication);
               track.stop();
               setIsSharing(false);
