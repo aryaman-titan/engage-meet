@@ -50,20 +50,23 @@ export default function RoomNameScreen({ name, roomName, setName, setRoomName, h
         setRoomName(event.target.value);
     };
 
-    const hasUsername = !window.location.search.includes('customIdentity=true') && user?.displayName;
+    const hasUsername = user?.displayName;
 
     return (
         <>
-            <Typography variant="h5" className={classes.gutterBottom}>
-                Join a Room
-      </Typography>
+            <Grid container justify="center">
+                <Typography variant="h5" className={classes.gutterBottom}>
+                    Join a Room
+                </Typography>
+            </Grid>
+
             <form onSubmit={handleSubmit}>
                 <div className={classes.inputContainer}>
                     {!hasUsername && (
                         <div className={classes.textFieldContainer}>
                             <InputLabel shrink htmlFor="input-user-name">
                                 Your Name
-              </InputLabel>
+                            </InputLabel>
                             <TextField
                                 id="input-user-name"
                                 variant="outlined"
@@ -77,7 +80,7 @@ export default function RoomNameScreen({ name, roomName, setName, setRoomName, h
                     <div className={classes.textFieldContainer}>
                         <InputLabel shrink htmlFor="input-room-name">
                             Room Name
-            </InputLabel>
+                        </InputLabel>
                         <TextField
                             autoCapitalize="false"
                             id="input-room-name"

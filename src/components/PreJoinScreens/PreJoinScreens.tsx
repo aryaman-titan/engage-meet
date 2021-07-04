@@ -34,6 +34,7 @@ export default function PreJoinScreens() {
     if (URLRoomName) {
       setRoomName(URLRoomName);
       if (user?.displayName) {
+        console.log(user?.displayName);
         setStep(Steps.deviceSelectionStep);
       }
     }
