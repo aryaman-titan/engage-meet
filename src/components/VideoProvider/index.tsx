@@ -3,7 +3,6 @@ import { CreateLocalTrackOptions, ConnectOptions, LocalAudioTrack, LocalVideoTra
 import { ErrorCallback } from '../../types';
 import { SelectedParticipantProvider } from './useSelectedParticipant/useSelectedParticipant';
 
-import AttachVisibilityHandler from './AttachVisibilityHandler/AttachVisibilityHandler';
 import useHandleRoomDisconnection from './useHandleRoomDisconnection/useHandleRoomDisconnection';
 import useHandleTrackPublicationFailed from './useHandleTrackPublicationFailed/useHandleTrackPublicationFailed';
 import useLocalTracks from './useLocalTracks/useLocalTracks';
@@ -86,7 +85,6 @@ export function VideoProvider({ options, children, onError = () => { } }: VideoP
             }}
         >
             <SelectedParticipantProvider room={room}>{children}</SelectedParticipantProvider>
-            <AttachVisibilityHandler />
         </VideoContext.Provider>
     );
 }
