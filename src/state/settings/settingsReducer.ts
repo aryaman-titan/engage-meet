@@ -25,9 +25,6 @@ export const initialSettings: Settings = {
   clientTrackSwitchOffControl: 'auto',
 };
 
-// This inputLabels object is used by ConnectionOptions.tsx. It is used to populate the id, name, and label props
-// of the various input elements. Using a typed object like this (instead of strings) eliminates the possibility
-// of there being a typo.
 export const inputLabels = (() => {
   const target: any = {};
   for (const setting in initialSettings) {

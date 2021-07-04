@@ -5,13 +5,8 @@ import { useAppState } from '../../state';
 export default function useConnectionOptions() {
   const { roomType, settings } = useAppState();
 
-  // See: https://sdk.twilio.com/js/video/releases/2.0.0/docs/global.html#ConnectOptions
-  // for available connection options.
   const connectionOptions: ConnectOptions = {
-    // Bandwidth Profile, Dominant Speaker, and Network Quality
-    // features are only available in Small Group or Group Rooms.
-    // Please set "Room Type" to "Group" or "Small Group" in your
-    // Twilio Console: https://www.twilio.com/console/video/configure
+   
     bandwidthProfile: {
       video: {
         mode: settings.bandwidthProfileMode,
@@ -23,18 +18,7 @@ export default function useConnectionOptions() {
     },
     dominantSpeaker: true,
     networkQuality: { local: 1, remote: 1 },
-
-    // Comment this line if you are playing music.
-    maxAudioBitrate: Number(settings.maxAudioBitrate),
-
-    // VP8 simulcast enables the media server in a Small Group or Group Room
-    // to adapt your encoded video quality for each RemoteParticipant based on
-    // their individual bandwidth constraints. Simulcast should be disabled if
-    // you are using Peer-to-Peer or 'Go' Rooms.
     preferredVideoCodecs: [{ codec: 'VP8', simulcast: roomType !== 'peer-to-peer' && roomType !== 'go' }],
-
-    //@ts-ignore - Internal use only. This property is not exposed in type definitions.
-    environment: process.env.REACT_APP_TWILIO_ENVIRONMENT,
   };
 
   // For mobile browsers, limit the maximum incoming video bitrate to 2.5 Mbps.

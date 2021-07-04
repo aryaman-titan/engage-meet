@@ -12,8 +12,6 @@ export default function useRoom(localTracks: LocalTrack[], onError: Callback, op
   const optionsRef = useRef(options);
 
   useEffect(() => {
-    // This allows the connect function to always access the most recent version of the options object. This allows us to
-    // reliably use the connect function at any time.
     optionsRef.current = options;
   }, [options]);
 
