@@ -17,6 +17,7 @@ import useScreenShareParticipant from '../../hooks/useScreenShareParticipant/use
 import useTrack from '../../hooks/useTrack/useTrack';
 import useVideoContext from '../../hooks/useVideoContext/useVideoContext';
 
+
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
     position: 'relative',
@@ -141,8 +142,6 @@ export default function MainParticipantInfo({ participant, children }: MainParti
 
   return (
     <div
-      data-cy-main-participant
-      data-cy-participant={participant.identity}
       className={clsx(classes.container, {
         [classes.fullWidth]: !isRemoteParticipantScreenSharing,
       })}
@@ -166,7 +165,7 @@ export default function MainParticipantInfo({ participant, children }: MainParti
           >
             <div className={classes.recordingIndicator}>
               <div className={classes.circle}></div>
-              <Typography variant="body1" color="inherit" data-cy-recording-indicator>
+              <Typography variant="body1" color="inherit">
                 Recording
               </Typography>
             </div>

@@ -82,7 +82,6 @@ export default function ToggleChatButton() {
 
   return (
     <Button
-      data-cy-chat-button
       onClick={toggleChatWindow}
       disabled={!conversation}
       startIcon={

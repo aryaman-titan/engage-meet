@@ -167,7 +167,6 @@ export default function ParticipantInfo({
         [classes.cursorPointer]: Boolean(onClick),
       })}
       onClick={onClick}
-      data-cy-participant={participant.identity}
     >
       <div className={classes.infoContainer}>
         <NetworkQualityLevel participant={participant} />
