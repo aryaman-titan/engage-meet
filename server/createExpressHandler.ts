@@ -18,7 +18,7 @@ const context: ServerlessContext = {
   ACCOUNT_SID: TWILIO_ACCOUNT_SID,
   TWILIO_API_KEY_SID,
   TWILIO_API_KEY_SECRET,
-  ROOM_TYPE: 'group',
+  ROOM_TYPE: 'go', // change to group in production
   CONVERSATIONS_SERVICE_SID: TWILIO_CONVERSATIONS_SERVICE_SID,
   getTwilioClient: () => twilioClient,
 };
@@ -27,6 +27,7 @@ export function createExpressHandler(serverlessFunction: ServerlessFunction) {
   return (req: Request, res: Response) => {
     serverlessFunction(context, req.body, (_, serverlessResponse) => {
       const { statusCode, headers, body } = serverlessResponse;
+      console.log(body);
 
       res
         .status(statusCode)

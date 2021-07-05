@@ -50,6 +50,14 @@ const useStyles = makeStyles((theme: Theme) => ({
     padding: '0.8em 0',
     margin: 0,
   },
+  loaderComponent: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    margin: 'auto',
+  },
 }));
 
 interface DeviceSelectionScreenProps {
@@ -75,8 +83,9 @@ export default function DeviceSelectionScreen({ name, roomName, setStep }: Devic
   if (isFetching || isConnecting) {
     return (
       <Grid container justify="center" alignItems="center" direction="column" style={{ height: '100%' }}>
-        <div>
-          <CircularProgress variant="indeterminate" />
+        <div style={{display: 'flex',  justifyContent:'center', alignItems:'center', height: '100vh', zIndex: 23}}>
+          <CircularProgress variant="indeterminate" size="40" />
+          {/* <LoopCircleLoading />; */}
         </div>
         <div>
           <Typography variant="body2" style={{ fontWeight: 'bold', fontSize: '16px' }}>

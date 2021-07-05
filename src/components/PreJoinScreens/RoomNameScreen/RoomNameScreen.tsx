@@ -79,7 +79,7 @@ export default function RoomNameScreen({ name, roomName, setName, setRoomName, h
                     )}
                     <div className={classes.textFieldContainer}>
                         <InputLabel shrink htmlFor="input-room-name">
-                            Room Name
+                            Room Name {user?.displayName}
                         </InputLabel>
                         <TextField
                             autoCapitalize="false"
@@ -95,9 +95,12 @@ export default function RoomNameScreen({ name, roomName, setName, setRoomName, h
                 <Grid container justify="center">
                     <Button
                         type="submit"
-                        disabled={!name || !roomName}
                     >
-                        <Fab color="primary" aria-label="add">
+                        <Fab
+                            color="primary"
+                            aria-label="add"
+                            disabled={!name || !roomName}
+                        >
                             <ArrowForwardIcon />
                         </Fab>
                     </Button>

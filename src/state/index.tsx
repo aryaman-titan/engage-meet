@@ -8,7 +8,7 @@ export interface StateContextType {
     error: TwilioError | Error | null;
     setError(error: TwilioError | Error | null): void;
     getToken(name: string, room: string, passcode?: string): Promise<{ room_type: RoomType; token: string }>;
-    user?: null | { displayName: undefined; photoURL: undefined};
+    user?: { displayName: undefined; photoURL: undefined};
     isAuthReady?: boolean;
     isFetching: boolean;
     activeSinkId: string;
@@ -27,7 +27,6 @@ export default function AppStateProvider(props: React.PropsWithChildren<{}>) {
     const [activeSinkId, setActiveSinkId] = useActiveSinkId();
     const [settings, dispatchSetting] = useReducer(settingsReducer, initialSettings);
     const [roomType, setRoomType] = useState<RoomType>();
-    const [user, setUser] = useState<StateContextType['user']>();
 
     let contextValue = {
         error,
