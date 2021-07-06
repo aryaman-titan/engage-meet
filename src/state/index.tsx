@@ -48,7 +48,7 @@ export default function AppStateProvider(props: React.PropsWithChildren<{}>) {
         getToken: async (user_identity, room_name) => {
             const endpoint = '/token';
 
-            await sleep(100000);
+            // await sleep(100000);
 
             return fetch(endpoint, {
                 method: 'POST',
