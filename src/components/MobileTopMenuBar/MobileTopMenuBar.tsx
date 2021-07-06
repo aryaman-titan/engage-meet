@@ -1,12 +1,12 @@
 import { Grid, makeStyles, Theme, Typography } from '@material-ui/core';
 import React, { useState } from 'react';
-import useVideoContext from '../../hooks/useVideoContext/useVideoContext';
 import EndCallButton from '../Buttons/EndCallButton/EndCallButton';
 import Menu from '../MenuBar/Menu/Menu';
 import Snackbar from '../Snackbar/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
-import FileCopyIcon from '@material-ui/icons/FileCopy';
+import ShareIcon from '@material-ui/icons/Share';
+
 
 const useStyles = makeStyles((theme: Theme) => ({
     container: {
@@ -36,7 +36,6 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export default function MobileTopMenuBar() {
     const classes = useStyles();
-    const { room } = useVideoContext();
 
     const [isCopied, setIsCopied] = useState(false);
 
@@ -50,7 +49,7 @@ export default function MobileTopMenuBar() {
             <Snackbar
                 open={isCopied}
                 headline="Message"
-                message={"Waiting for the new particpant!"}
+                message={"Meeting URL copied to clipboard"}
                 variant="info"
                 handleClose={() => setIsCopied(false)}
             />
@@ -60,10 +59,11 @@ export default function MobileTopMenuBar() {
                         <IconButton
                             aria-label="delete"
                             onClick={copyToClipboard}>
-                            <FileCopyIcon color="primary" />
+                            <ShareIcon color="primary" />
                         </IconButton>
                     </Tooltip>
-                    {room!.name}</Typography>
+                                Share this Meeting!
+                </Typography>
                 <div>
                     <EndCallButton className={classes.endCallButton} />
                     <Menu buttonClassName={classes.settingsButton} />

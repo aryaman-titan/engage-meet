@@ -12,8 +12,8 @@ import ToggleAudioButton from '../Buttons/ToggleAudioButton/ToggleAudioButton';
 import ToggleChatButton from '../Buttons/ToggleChatButton/ToggleChatButton';
 import ToggleVideoButton from '../Buttons/ToggleVideoButton/ToggleVideoButton';
 import ToggleScreenShareButton from '../Buttons/ToogleScreenShareButton/ToggleScreenShareButton';
-import FileCopyIcon from '@material-ui/icons/FileCopy';
 import IconButton from '@material-ui/core/IconButton';
+import ShareIcon from '@material-ui/icons/Share';
 import Tooltip from '@material-ui/core/Tooltip';
 import Snackbar from '../Snackbar/Snackbar';
 
@@ -71,7 +71,6 @@ export default function MenuBar() {
     const { isSharingScreen, toggleScreenShare } = useVideoContext();
     const roomState = useRoomState();
     const isReconnecting = roomState === 'reconnecting';
-    const { room } = useVideoContext();
 
     const [isCopied, setIsCopied] = useState(false);
 
@@ -85,7 +84,7 @@ export default function MenuBar() {
             <Snackbar
                 open={isCopied}
                 headline="Message"
-                message={"Waiting for the new particpant!"}
+                message={"Meeting URL copied to clipboard"}
                 variant="info"
                 handleClose={() => setIsCopied(false)}
             />
@@ -104,10 +103,10 @@ export default function MenuBar() {
                                     <IconButton
                                         aria-label="delete"
                                         onClick={copyToClipboard}>
-                                        <FileCopyIcon color="primary" />
+                                        <ShareIcon color="primary" />
                                     </IconButton>
                                 </Tooltip>
-                                {room!.name}
+                                Share this Meeting!
                             </Typography>
                         </Grid>
                     </Hidden>

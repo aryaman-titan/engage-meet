@@ -72,7 +72,8 @@ export const ChatProvider: React.FC = ({ children }) => {
           setConversation(newConversation);
         })
         .catch(() => {
-          onError(new Error('There was a problem getting the Conversation associated with this room.'));
+         // TODO: Throwing error even when conversation established  
+         onError(new Error('Welcome!'));
         });
     }
   }, [room, chatClient, onError]);

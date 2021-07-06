@@ -39,10 +39,16 @@ export default function AppStateProvider(props: React.PropsWithChildren<{}>) {
         roomType,
     } as StateContextType;
 
+    const sleep = (ms: any) => {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
     contextValue = {
         ...contextValue,
         getToken: async (user_identity, room_name) => {
             const endpoint = '/token';
+
+            await sleep(100000);
 
             return fetch(endpoint, {
                 method: 'POST',
