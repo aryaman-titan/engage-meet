@@ -3,7 +3,6 @@ import { RecordingRules, RoomType } from '../types';
 import { TwilioError } from 'twilio-video';
 import { settingsReducer, initialSettings, Settings, SettingsAction } from './settings/settingsReducer';
 import useActiveSinkId from './useActiveSinkId/useActiveSinkId';
-
 export interface StateContextType {
     error: TwilioError | Error | null;
     setError(error: TwilioError | Error | null): void;

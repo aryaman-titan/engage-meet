@@ -44,6 +44,7 @@ export default function NetworkQualityLevel({ participant }: { participant: Part
             style={{
               height: `${STEP * (level + 1)}px`,
               background: networkQualityLevel > level ? 'white' : 'rgba(255, 255, 255, 0.2)',
+              borderRadius: '20%',
             }}
           />
         ))}

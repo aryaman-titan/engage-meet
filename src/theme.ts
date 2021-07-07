@@ -36,6 +36,9 @@ export default createMuiTheme({
         'html, body, #root': {
           height: '100%',
         },
+        'body' : {
+            overflow: 'hidden',
+        }
       },
     },
     MuiButton: {
