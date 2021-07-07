@@ -79,8 +79,6 @@ export default function ChatInput({ conversation, isChatWindowOpen }: ChatInputP
 
   useEffect(() => {
     if (isChatWindowOpen) {
-      // When the chat window is opened, we will focus on the text input.
-      // This is so the user doesn't have to click on it to begin typing a message.
       textInputRef.current?.focus();
     }
   }, [isChatWindowOpen]);

@@ -4,6 +4,9 @@ import { Link } from '@material-ui/core';
 import linkify from 'linkify-it';
 import { makeStyles } from '@material-ui/core/styles';
 
+//@ts-ignore
+import { Twemoji } from "react-emoji-render";
+
 const useStyles = makeStyles({
   messageContainer: {
     borderRadius: '16px',
@@ -15,6 +18,7 @@ const useStyles = makeStyles({
     backgroundColor: '#E1E3EA',
     hyphens: 'auto',
     whiteSpace: 'pre-wrap',
+    fontSize: '1em',
   },
   isLocalParticipant: {
     backgroundColor: '#CCE4FF',
@@ -28,7 +32,13 @@ interface TextMessageProps {
 
 function addLinks(text: string) {
   const matches = linkify().match(text);
-  if (!matches) return text;
+  if (!matches) return (
+      <Twemoji 
+        svg
+        onlyEmojiClassName="make-emojis-large"
+        text={text}
+      />
+    );
 
   const results = [];
   let lastIndex = 0;

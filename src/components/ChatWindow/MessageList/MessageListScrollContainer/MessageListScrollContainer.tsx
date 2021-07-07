@@ -22,6 +22,7 @@ const styles = createStyles({
     overflowY: 'auto',
     flex: '1',
     paddingBottom: '1em',
+    fontSize: '1.5em',
   },
   button: {
     position: 'absolute',
