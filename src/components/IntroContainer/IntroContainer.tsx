@@ -3,7 +3,6 @@ import { makeStyles, Theme, Typography } from '@material-ui/core';
 import VideoLogo from './VideoLogo';
 import './stars.css';
 import Grid from '@material-ui/core/Grid';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 
 const useStyles = makeStyles((theme: Theme) => ({
     background: {
