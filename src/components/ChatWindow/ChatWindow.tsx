@@ -13,14 +13,20 @@ const useStyles = makeStyles((theme: Theme) =>
       zIndex: 9,
       display: 'flex',
       flexDirection: 'column',
+      flexWrap: 'wrap',
       borderLeft: '1px solid #E4E7E9',
-      [theme.breakpoints.down('sm')]: {
+      [theme.breakpoints.down('xs')]: {
         position: 'fixed',
         top: 0,
         left: 0,
         bottom: 0,
         right: 0,
-        zIndex: 100,
+      },
+      [theme.breakpoints.down('sm')]: {
+        position: 'fixed',
+        top: 0,
+        bottom: 0,
+        right: 0,
       },
     },
     hide: {
