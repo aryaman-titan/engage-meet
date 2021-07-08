@@ -13,9 +13,9 @@ export default function ToggleVideoButton(props: { disabled?: boolean; className
   const [isVideoEnabled, toggleVideoEnabled] = useLocalVideoToggle();
   const lastClickTimeRef = useRef(0);
   const { hasVideoInputDevices } = useDevices();
+  const toggleVideoButtonRef = useRef<HTMLButtonElement>(null);
 
-  const toggleVideo = useCallback((e) => {
-    e.preventDefault();
+  const toggleVideo = useCallback(() => {
     // rate limiting the video toggle from client side as 
     // it turned out to be expensive in this case emitting 
     // series of signals
@@ -25,12 +25,13 @@ export default function ToggleVideoButton(props: { disabled?: boolean; className
     }
   }, [toggleVideoEnabled]);
 
-  useHotkeys('ctrl+e', toggleVideo);
+  useHotkeys('ctrl+e', () => toggleVideoButtonRef.current?.click());
 
   return (
     <Button
       className={props.className}
       onClick={toggleVideo}
+      ref={toggleVideoButtonRef}
       disabled={!hasVideoInputDevices || props.disabled}
       startIcon={isVideoEnabled ? <VideoOnIcon /> : <VideoOffIcon />}
     >
