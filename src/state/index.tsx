@@ -38,6 +38,7 @@ export default function AppStateProvider(props: React.PropsWithChildren<{}>) {
         roomType,
     } as StateContextType;
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const sleep = (ms: any) => {
         return new Promise(resolve => setTimeout(resolve, ms));
     }

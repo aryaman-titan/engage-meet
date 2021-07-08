@@ -13,41 +13,52 @@ import theme from './theme';
 import './types';
 import { ChatProvider } from './components/ChatProvider';
 import { VideoProvider } from './components/VideoProvider';
+import { SnackbarProvider } from 'notistack';
 import useConnectionOptions from './utils/useConnectionOptions/useConnectionOptions';
 import UnsupportedBrowserWarning from './components/UnsupportedBrowserWarning/UnsupportedBrowserWarning';
 
 const VideoApp = () => {
-  const { error, setError } = useAppState();
-  const connectionOptions = useConnectionOptions();
+    const { error, setError } = useAppState();
+    const connectionOptions = useConnectionOptions();
 
-  return (
-    <VideoProvider options={connectionOptions} onError={setError}>
-      <ErrorDialog dismissError={() => setError(null)} error={error} />
-      <ChatProvider>
-        <App />
-      </ChatProvider>
-    </VideoProvider>
-  );
+    return (
+        <VideoProvider options={connectionOptions} onError={setError}>
+            <ErrorDialog dismissError={() => setError(null)} error={error} />
+            <ChatProvider>
+                <App />
+            </ChatProvider>
+        </VideoProvider>
+    );
 };
 
 ReactDOM.render(
-  <MuiThemeProvider theme={theme}>
-    <CssBaseline />
-    <UnsupportedBrowserWarning>
-      <Router>
-        <AppStateProvider>
-          <Switch>
-            <PrivateRoute exact path="/">
-              <VideoApp />
-            </PrivateRoute>
-            <PrivateRoute path="/room/:URLRoomName">
-              <VideoApp />
-            </PrivateRoute>
-            <Redirect to="/" />
-          </Switch>
-        </AppStateProvider>
-      </Router>
-    </UnsupportedBrowserWarning>
-  </MuiThemeProvider>,
-  document.getElementById('root')
+    <MuiThemeProvider theme={theme}>
+        <CssBaseline />
+        <SnackbarProvider
+            maxSnack={8}
+            anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+            }}
+            autoHideDuration={10000}
+            variant="info"
+        >
+            <UnsupportedBrowserWarning>
+                <Router>
+                    <AppStateProvider>
+                        <Switch>
+                            <PrivateRoute exact path="/">
+                                <VideoApp />
+                            </PrivateRoute>
+                            <PrivateRoute path="/room/:URLRoomName">
+                                <VideoApp />
+                            </PrivateRoute>
+                            <Redirect to="/" />
+                        </Switch>
+                    </AppStateProvider>
+                </Router>
+            </UnsupportedBrowserWarning>
+        </SnackbarProvider>
+    </MuiThemeProvider>,
+    document.getElementById('root')
 );
