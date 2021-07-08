@@ -98,6 +98,7 @@ const IntroContainer = (props: IntroContainerProps) => {
                 justify="center" 
                 alignItems="center"
                 spacing={10}
+                style={{paddingTop: '125px'}}
             >
                 <div className={classes.container}>
                     <div className={classes.innerContainer}>

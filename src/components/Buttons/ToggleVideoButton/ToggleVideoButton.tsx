@@ -7,17 +7,25 @@ import VideoOnIcon from '../../../icons/VideoOnIcon';
 import useDevices from '../../../hooks/useDevices/useDevices';
 import useLocalVideoToggle from '../../../hooks/useLocalVideoToggle/useLocalVideoToggle';
 
+import { useHotkeys } from 'react-hotkeys-hook';
+
 export default function ToggleVideoButton(props: { disabled?: boolean; className?: string }) {
   const [isVideoEnabled, toggleVideoEnabled] = useLocalVideoToggle();
   const lastClickTimeRef = useRef(0);
   const { hasVideoInputDevices } = useDevices();
 
-  const toggleVideo = useCallback(() => {
+  const toggleVideo = useCallback((e) => {
+    e.preventDefault();
+    // rate limiting the video toggle from client side as 
+    // it turned out to be expensive in this case emitting 
+    // series of signals
     if (Date.now() - lastClickTimeRef.current > 500) {
       lastClickTimeRef.current = Date.now();
       toggleVideoEnabled();
     }
   }, [toggleVideoEnabled]);
+
+  useHotkeys('ctrl+e', toggleVideo);
 
   return (
     <Button
