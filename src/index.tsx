@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import { CssBaseline } from '@material-ui/core';
-import { MuiThemeProvider } from '@material-ui/core/styles';
+import { MuiThemeProvider, makeStyles } from '@material-ui/core/styles';
 
 import App from './App';
 import AppStateProvider, { useAppState } from './state';
@@ -17,48 +17,63 @@ import { SnackbarProvider } from 'notistack';
 import useConnectionOptions from './utils/useConnectionOptions/useConnectionOptions';
 import UnsupportedBrowserWarning from './components/UnsupportedBrowserWarning/UnsupportedBrowserWarning';
 
+const styles = makeStyles(() => ({
+    success: { backgroundColor: '#43a047' },
+    error: { backgroundColor: '#d32f2f' },
+    warning: { backgroundColor: '#ffa000' },
+    info: { backgroundColor: '#2979ff' }
+}));
+
 const VideoApp = () => {
     const { error, setError } = useAppState();
     const connectionOptions = useConnectionOptions();
 
+    const classes = styles();
+
     return (
-        <VideoProvider options={connectionOptions} onError={setError}>
-            <ErrorDialog dismissError={() => setError(null)} error={error} />
-            <ChatProvider>
-                <App />
-            </ChatProvider>
-        </VideoProvider>
+        <SnackbarProvider
+            hideIconVariant
+            maxSnack={4}
+            anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+            }}
+            autoHideDuration={10000}
+            classes={{
+                variantSuccess: classes.success,
+                variantError: classes.error,
+                variantWarning: classes.warning,
+                variantInfo: classes.info,
+            }}
+        >
+            <VideoProvider options={connectionOptions} onError={setError}>
+                <ErrorDialog dismissError={() => setError(null)} error={error} />
+                <ChatProvider>
+                    <App />
+                </ChatProvider>
+            </VideoProvider>
+        </SnackbarProvider>
     );
 };
 
 ReactDOM.render(
     <MuiThemeProvider theme={theme}>
         <CssBaseline />
-        <SnackbarProvider
-            maxSnack={8}
-            anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-            }}
-            autoHideDuration={10000}
-            variant="info"
-        >
-            <UnsupportedBrowserWarning>
-                <Router>
-                    <AppStateProvider>
-                        <Switch>
-                            <PrivateRoute exact path="/">
-                                <VideoApp />
-                            </PrivateRoute>
-                            <PrivateRoute path="/room/:URLRoomName">
-                                <VideoApp />
-                            </PrivateRoute>
-                            <Redirect to="/" />
-                        </Switch>
-                    </AppStateProvider>
-                </Router>
-            </UnsupportedBrowserWarning>
-        </SnackbarProvider>
+        <UnsupportedBrowserWarning>
+            <Router>
+                <AppStateProvider>
+                    <Switch>
+                        <PrivateRoute exact path="/">
+                            <VideoApp />
+                        </PrivateRoute>
+                        <PrivateRoute path="/room/:URLRoomName">
+                            <VideoApp />
+                        </PrivateRoute>
+                        <Redirect to="/" />
+                    </Switch>
+                </AppStateProvider>
+            </Router>
+        </UnsupportedBrowserWarning>
     </MuiThemeProvider>,
     document.getElementById('root')
 );

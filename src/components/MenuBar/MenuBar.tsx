@@ -116,9 +116,7 @@ export default function MenuBar() {
                             <ToggleAudioButton disabled={isReconnecting} />
                             <ToggleVideoButton disabled={isReconnecting} />
                             {!isSharingScreen && !isMobile && <ToggleScreenShareButton disabled={isReconnecting} />}
-                            <Hidden smDown>
-                                <ChatSnackButton />
-                            </Hidden>
+                            <ChatSnackButton />
                             <ToggleChatButton />
                         </Grid>
                     </Grid>

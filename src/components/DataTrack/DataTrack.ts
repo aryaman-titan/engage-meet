@@ -1,15 +1,24 @@
-import { useEffect } from 'react';
-import { DataTrack as IDataTrack } from 'twilio-video';
-import { useSnackbar } from 'notistack';
+import { useEffect } from "react";
+import { DataTrack as IDataTrack } from "twilio-video";
+import { useSnackbar} from "notistack";
+import { getRandomVariant } from "../Buttons/ChatSnackButton/ChatInput";
 
 export default function DataTrack({ track }: { track: IDataTrack }) {
   const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
-    const handleMessage = (message: string) => enqueueSnackbar(message);
-    track.on('message', handleMessage);
+    const handleMessage = (message: string) => {
+      enqueueSnackbar(
+        message,
+        {
+          preventDuplicate: true,
+          variant: getRandomVariant(),
+        }
+      );
+    };
+    track.on("message", handleMessage);
     return () => {
-      track.off('message', handleMessage);
+      track.off("message", handleMessage);
     };
   }, [track, enqueueSnackbar]);
 
