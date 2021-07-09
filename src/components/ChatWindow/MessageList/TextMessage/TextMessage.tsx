@@ -10,7 +10,8 @@ import { Twemoji } from "react-emoji-render";
 const useStyles = makeStyles({
   messageContainer: {
     borderRadius: '16px',
-    display: 'inline-flex',
+    display: 'flex',
+    flexWrap: 'wrap',
     alignItems: 'center',
     padding: '0.5em 0.8em 0.6em',
     margin: '0.3em 0 0',

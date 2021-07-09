@@ -8,17 +8,16 @@ export default function useLocalTracks() {
   const [videoTrack, setVideoTrack] = useState<LocalVideoTrack>();
   const [isAcquiringLocalTracks, setIsAcquiringLocalTracks] = useState(false);
 
-  const getLocalAudioTrack = useCallback((deviceId?: string) => {
+  const getLocalAudioTrack = useCallback(async (deviceId?: string) => {
     const options: CreateLocalTrackOptions = {};
 
     if (deviceId) {
       options.deviceId = { exact: deviceId };
     }
 
-    return Video.createLocalAudioTrack(options).then(newTrack => {
+    const newTrack = await Video.createLocalAudioTrack(options);
       setAudioTrack(newTrack);
       return newTrack;
-    });
   }, []);
 
   const getLocalVideoTrack = useCallback(async () => {
