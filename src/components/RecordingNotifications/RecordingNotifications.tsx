@@ -61,11 +61,11 @@ export default function RecordingNotifications() {
         headline="Recording Complete"
         message={
           <>
-            You can view the recording in the{' '}
-            <Link target="_blank" rel="noopener" href="https://www.twilio.com/console/video/logs/recordings">
-              Twilio Console
+            For getting access of this recording, you can contact{' '}
+            <Link target="_blank" rel="noopener" href="mailto:aryamanbehera@gmail.com">
+              aryamanbehera@gmail.com
             </Link>
-            . Recordings will be available once this room has ended.
+            {' '}and will be available once this room has ended.
           </>
         }
         variant="info"
