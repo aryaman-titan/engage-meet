@@ -115,11 +115,11 @@ const IntroContainer = (props: IntroContainerProps) => {
                 </div>
                 <Grid item style={{marginTop: '4em'}}>
                     <Typography variant="h5" className={classes.title}>
-                        Made with  ❤️  by &nbsp;
+                        Made with  ❤️  by{' '}
                         <a 
                             href="https://github.com/aryaman-titan" 
                             target="_blank" 
-                            rel="noopener noreferrer" 
+                            rel="noopener noreferrer" // for security reasons
                             className={classes.title}>
                              Aryaman
                         </a>

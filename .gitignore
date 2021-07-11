@@ -34,6 +34,7 @@ yarn-error.log*
 
 # production
 /build
+public/virtualbackground
 
 # misc
 .DS_Store

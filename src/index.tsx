@@ -15,7 +15,6 @@ import { ChatProvider } from './components/ChatProvider';
 import { VideoProvider } from './components/VideoProvider';
 import { SnackbarProvider } from 'notistack';
 import useConnectionOptions from './utils/useConnectionOptions/useConnectionOptions';
-import UnsupportedBrowserWarning from './components/UnsupportedBrowserWarning/UnsupportedBrowserWarning';
 
 const styles = makeStyles(() => ({
     success: { backgroundColor: '#43a047' },
@@ -59,21 +58,19 @@ const VideoApp = () => {
 ReactDOM.render(
     <MuiThemeProvider theme={theme}>
         <CssBaseline />
-        <UnsupportedBrowserWarning>
-            <Router>
-                <AppStateProvider>
-                    <Switch>
-                        <PrivateRoute exact path="/">
-                            <VideoApp />
-                        </PrivateRoute>
-                        <PrivateRoute path="/room/:URLRoomName">
-                            <VideoApp />
-                        </PrivateRoute>
-                        <Redirect to="/" />
-                    </Switch>
-                </AppStateProvider>
-            </Router>
-        </UnsupportedBrowserWarning>
+        <Router>
+            <AppStateProvider>
+                <Switch>
+                    <PrivateRoute exact path="/">
+                        <VideoApp />
+                    </PrivateRoute>
+                    <PrivateRoute path="/room/:URLRoomName">
+                        <VideoApp />
+                    </PrivateRoute>
+                    <Redirect to="/" />
+                </Switch>
+            </AppStateProvider>
+        </Router>
     </MuiThemeProvider>,
     document.getElementById('root')
 );

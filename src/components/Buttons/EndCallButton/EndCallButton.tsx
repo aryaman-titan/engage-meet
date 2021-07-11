@@ -7,15 +7,20 @@ import CallRoundedIcon from '@material-ui/icons/CallRounded';
 import useVideoContext from '../../../hooks/useVideoContext/useVideoContext';
 
 export default function EndCallButton(props: { className?: string }) {
-    const { room } = useVideoContext();
+    const { room, updateBackgroundSettings } = useVideoContext();
 
+    const handleDisconnect = () => {
+        updateBackgroundSettings({ type: 'none', index: 0 }, true);
+        room!.disconnect();
+    }
     return (
-        <Button 
-            onClick={() => room!.disconnect()}
+        <Button
+            onClick={handleDisconnect}
             className={clsx(props.className)}
-            style={{backgroundColor:'red', color: 'white'}}
+            style={{ backgroundColor: 'red', color: 'white' }}
         >
             <CallRoundedIcon />
         </Button>
     );
 }
+
