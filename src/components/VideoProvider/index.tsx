@@ -1,4 +1,4 @@
-import React, { createContext, ReactNode, useCallback } from 'react';
+import React, { createContext, ReactNode, useCallback, useState } from 'react';
 import { CreateLocalTrackOptions, ConnectOptions, LocalAudioTrack, LocalVideoTrack, Room } from 'twilio-video';
 import { ErrorCallback } from '../../types';
 import { SelectedParticipantProvider } from './useSelectedParticipant/useSelectedParticipant';
@@ -9,7 +9,7 @@ import useLocalTracks from './useLocalTracks/useLocalTracks';
 import useRestartAudioTrackOnDeviceChange from './useRestartAudioTrackOnDeviceChange/useRestartAudioTrackOnDeviceChange';
 import useRoom from './useRoom/useRoom';
 import useScreenShareToggle from './useScreenShareToggle/useScreenShareToggle';
-
+import useBackgroundSettings, { BackgroundSettings } from '../useBackgroundSettings/useBackgroundSettings';
 export interface IVideoContext {
     room: Room | null;
     localTracks: (LocalAudioTrack | LocalVideoTrack)[];
@@ -23,6 +23,10 @@ export interface IVideoContext {
     isSharingScreen: boolean;
     toggleScreenShare: () => void;
     getAudioAndVideoTracks: () => Promise<void>;
+    isBackgroundSelectionOpen: boolean;
+    setIsBackgroundSelectionOpen: (value: boolean) => void;
+    backgroundSettings: BackgroundSettings;
+    setBackgroundSettings: (settings: BackgroundSettings) => void;
 }
 
 export const VideoContext = createContext<IVideoContext>(null!);
@@ -67,6 +71,9 @@ export function VideoProvider({ options, children, onError = () => { } }: VideoP
     useHandleTrackPublicationFailed(room, onError);
     useRestartAudioTrackOnDeviceChange(localTracks);
 
+    const [isBackgroundSelectionOpen, setIsBackgroundSelectionOpen] = useState(false);
+    const [backgroundSettings, setBackgroundSettings] = useBackgroundSettings();
+
     return (
         <VideoContext.Provider
             value={{
@@ -82,6 +89,10 @@ export function VideoProvider({ options, children, onError = () => { } }: VideoP
                 isSharingScreen,
                 toggleScreenShare,
                 getAudioAndVideoTracks,
+                isBackgroundSelectionOpen,
+                setIsBackgroundSelectionOpen,
+                backgroundSettings,
+                setBackgroundSettings,
             }}
         >
             <SelectedParticipantProvider room={room}>{children}</SelectedParticipantProvider>

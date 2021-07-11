@@ -41,7 +41,7 @@ function BackgroundSelectionDialog() {
       <div className={classes.thumbnailContainer}>
         <BackgroundThumbnail thumbnail={'none'} name={'None'} />
         <BackgroundThumbnail thumbnail={'blur'} name={'Blur'} />
-        {images.map((image, index) => (
+        {images.map((image: React.Key | null | undefined, index: string | number) => (
           <BackgroundThumbnail
             thumbnail={'image'}
             name={imageNames[index]}
