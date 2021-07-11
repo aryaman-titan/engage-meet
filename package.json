@@ -20,6 +20,7 @@
     "@types/react-dom": "^16.9.5",
     "@types/react-router-dom": "^5.1.3",
     "concurrently": "^5.1.0",
+    "copyfiles": "^2.4.1",
     "d3-timer": "^1.0.10",
     "express": "^4.17.1",
     "fscreen": "^1.0.2",
@@ -36,6 +37,7 @@
     "react-loadingg": "^1.7.2",
     "react-router-dom": "^5.1.2",
     "react-scripts": "4.0.3",
+    "rimraf": "^3.0.2",
     "ts-node": "^9.1.1",
     "twilio": "^3.57.0",
     "twilio-video": "^2.14.0",
@@ -48,6 +50,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint src server",
+    "postinstall": "rimraf public/virtualbackground && copyfiles -f node_modules/@twilio/video-processors/dist/build/* public/virtualbackground",
     "server": "ts-node -T -P server/tsconfig.json server/index.ts"
   },
   "eslintConfig": {
