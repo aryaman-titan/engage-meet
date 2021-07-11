@@ -5,7 +5,7 @@ import ChatWindow from '../ChatWindow/ChatWindow';
 import ParticipantList from '../ParticipantList/ParticipantList';
 import MainParticipant from '../MainParticipant/MainParticipant';
 import useChatContext from '../../hooks/useChatContext/useChatContext';
-import BackgroundSelectionDialog from '../../BackgroundSelectionDialog/BackgroundSelectionDialog';
+import BackgroundSelectionDialog from '../BackgroundSelectionDialog/BackgroundSelectionDialog';
 
 const useStyles = makeStyles((theme: Theme) => {
   const totalMobileSidebarHeight = `${theme.sidebarMobileHeight +

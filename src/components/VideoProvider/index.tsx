@@ -9,7 +9,7 @@ import useLocalTracks from './useLocalTracks/useLocalTracks';
 import useRestartAudioTrackOnDeviceChange from './useRestartAudioTrackOnDeviceChange/useRestartAudioTrackOnDeviceChange';
 import useRoom from './useRoom/useRoom';
 import useScreenShareToggle from './useScreenShareToggle/useScreenShareToggle';
-import useBackgroundSettings, { BackgroundSettings } from '../useBackgroundSettings/useBackgroundSettings';
+import useBackgroundSettings, { BackgroundSettings } from './useBackgroundSettings/useBackgroundSettings';
 export interface IVideoContext {
     room: Room | null;
     localTracks: (LocalAudioTrack | LocalVideoTrack)[];
