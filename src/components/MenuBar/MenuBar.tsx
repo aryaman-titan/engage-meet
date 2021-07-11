@@ -118,12 +118,12 @@ export default function MenuBar() {
                             {!isSharingScreen && !isMobile && <ToggleScreenShareButton disabled={isReconnecting} />}
                             <ChatSnackButton />
                             <ToggleChatButton />
+                            <Menu />
                         </Grid>
                     </Grid>
                     <Hidden smDown>
                         <Grid style={{ flex: 1 }}>
                             <Grid container justify="flex-end">
-                                <Menu />
                                 <EndCallButton />
                             </Grid>
                         </Grid>
