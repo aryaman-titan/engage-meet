@@ -1,12 +1,11 @@
-import { useEffect, useState } from 'react';
+import { Room } from 'twilio-video';
+import { useCallback, useState } from 'react';
+import { GaussianBlurBackgroundProcessor } from '@twilio/video-processors';
 
 import SanFranciscoThumb from '../../../images/thumb/SanFrancisco.jpg';
 
 import { Thumbnail } from '../../BackgroundSelectionDialog/BackgroundThumbnail/BackgroundThumbnail';
 
-import { VirtualBackgroundProcessor } from '@twilio/video-processors';
-
-import useLocalVideoToggle from "../../../hooks/useLocalVideoToggle/useLocalVideoToggle";
 export interface BackgroundSettings {
     type: Thumbnail;
     index?: number;
@@ -20,33 +19,76 @@ const images = [
     SanFranciscoThumb,
 ];
 
+
 export const backgroundConfig = {
     imageNames,
     images,
 };
 
-// TODO : Add video processing logic after backgroundSettings change
-// useEffect hooks, etc ...
-const assetsPath = '/virtualbackground'
+const bgLibSettings = {
+    assetsPath: '/virtualbackground',
+};
 
-export default function useBackgroundSettings() {
+const BG_SETTINGS_KEY = 'bgsettings5';
 
-    const [isVideoEnabled, toggleVideoEnabled] = useLocalVideoToggle();
+let blurProcessor: GaussianBlurBackgroundProcessor;
 
-    const [backgroundSettings, setBackgroundSettings] = useState({
-        type: 'none',
-        index: 0,
-    } as BackgroundSettings);
+export default function useBackgroundSettings(room: Room | undefined | null) {
 
-    useEffect(() => {
-        if (backgroundSettings.type !== 'none') {
-            const virtualBackgroundProcessor = new VirtualBackgroundProcessor({
-                assetsPath,
-                backgroundImage,
-                fitType,
-              });
-        }
-    }, [backgroundSettings])
+    //store the background settings in LocalStorage
+    let currentSettings: BackgroundSettings;
+    const localStorageSetting = window.localStorage.getItem(BG_SETTINGS_KEY);
+    currentSettings = localStorageSetting ? JSON.parse(localStorageSetting!) : { type: 'none', index: 0 };
 
-    return [backgroundSettings, setBackgroundSettings] as const;
+    const [backgroundSettings, setBackgroundSettings] = useState<BackgroundSettings>(currentSettings);
+
+    const updateSettings = (settings: BackgroundSettings): void => {
+        setBackgroundSettings(settings);
+        window.localStorage.setItem(BG_SETTINGS_KEY, JSON.stringify(settings));
+    };
+
+    const updateBackgroundSettings = useCallback(
+        async (settings: BackgroundSettings, reset?: boolean, force?: boolean, newRoom?: Room) => {
+            // reset, used for resetting background settings when camera is off/no video tracks
+            let currentRoom = room;
+            if (reset) {
+                updateSettings({ type: 'none' });
+                return;
+            }
+            currentRoom = currentRoom || newRoom;
+            if (!currentRoom) {
+                return;
+            }
+
+            const videoTrackValue = Array.from(currentRoom.localParticipant.videoTracks.values())[0];
+            if (!videoTrackValue) {
+                return;
+            }
+            const videoTrack = videoTrackValue.track;
+            const { type } = settings;
+            if (type !== backgroundSettings.type || force) {
+                if (type === 'none' && videoTrack.processor) {
+                    videoTrack.removeProcessor(videoTrack.processor);
+                } else if (type === 'blur') {
+                    if (!blurProcessor) {
+                        blurProcessor = new GaussianBlurBackgroundProcessor({ ...bgLibSettings });
+                        await blurProcessor.loadModel();
+                    }
+                    if (videoTrack.processor) {
+                        videoTrack.removeProcessor(videoTrack.processor);
+                    }
+                    videoTrack.addProcessor(blurProcessor);
+                } else {
+                    // TODO currently just removes processor, implement background image replacement logic
+                    if (videoTrack.processor) {
+                        videoTrack.removeProcessor(videoTrack.processor);
+                    }
+                }
+            }
+            updateSettings(settings);
+        },
+        [backgroundSettings, room]
+    );
+
+    return [backgroundSettings, updateBackgroundSettings] as const;
 }

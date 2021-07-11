@@ -15,6 +15,7 @@ import { useAppState } from '../../../state';
 import useIsRecording from '../../../hooks/useIsRecording/useIsRecording';
 import useVideoContext from '../../../hooks/useVideoContext/useVideoContext';
 import useChatContext from '../../../hooks/useChatContext/useChatContext';
+import useLocalVideoToggle from '../../../hooks/useLocalVideoToggle/useLocalVideoToggle';
 
 export const IconContainer = styled('div')({
   display: 'flex',
@@ -31,6 +32,7 @@ export default function Menu(props: { buttonClassName?: string }) {
   const [settingsOpen, setSettingsOpen] = useState(false);
 
   const { isFetching, updateRecordingRules, roomType } = useAppState();
+  const [isVideoEnabled] = useLocalVideoToggle();
   const { room, setIsBackgroundSelectionOpen} = useVideoContext();
   const { setIsChatWindowOpen } = useChatContext();
   const isRecording = useIsRecording();
@@ -97,6 +99,7 @@ export default function Menu(props: { buttonClassName?: string }) {
               setIsChatWindowOpen(false);
               setMenuOpen(false);
             }}
+            disabled={!isVideoEnabled}
           >
             <IconContainer>
               <BackgroundIcon />

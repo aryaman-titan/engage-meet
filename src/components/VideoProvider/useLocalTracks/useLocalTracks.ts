@@ -36,6 +36,7 @@ export default function useLocalTracks() {
     };
 
     return Video.createLocalVideoTrack(options).then(newTrack => {
+
       setVideoTrack(newTrack);
       return newTrack;
     });

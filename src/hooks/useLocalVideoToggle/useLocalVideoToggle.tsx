@@ -1,24 +1,25 @@
-import { LocalVideoTrack, VideoProcessor } from 'twilio-video';
+import { LocalVideoTrack } from 'twilio-video';
+
 import { useCallback, useState } from 'react';
 import useVideoContext from '../useVideoContext/useVideoContext';
 
 
 export default function useLocalVideoToggle() {
-    const { room, localTracks, getLocalVideoTrack, removeLocalVideoTrack, onError } = useVideoContext();
+    const {
+        room,
+        localTracks,
+        getLocalVideoTrack,
+        removeLocalVideoTrack,
+        onError,
+        backgroundSettings,
+        updateBackgroundSettings,
+    } = useVideoContext();
+
     const localParticipant = room?.localParticipant;
     const videoTrack = localTracks.find(track => track.name.includes('camera')) as LocalVideoTrack;
     const [isPublishing, setIspublishing] = useState(false);
 
-    const setProcessor = (processor: VideoProcessor, track: LocalVideoTrack) => {
-        if (track.processor) {
-            track.removeProcessor(track.processor);
-        }
-        if (processor) {
-            track.addProcessor(processor);
-        }
-    };
-
-    const toggleVideoEnabled = useCallback((processor?: VideoProcessor ) => {
+    const toggleVideoEnabled = useCallback(() => {
         if (!isPublishing) {
             if (videoTrack) {
                 const localTrackPublication = localParticipant?.unpublishTrack(videoTrack);
@@ -27,18 +28,24 @@ export default function useLocalVideoToggle() {
             } else {
                 setIspublishing(true);
                 getLocalVideoTrack()
-                    .then((track: LocalVideoTrack) => {
-                        if(processor){
-
-                            setProcessor(processor, track);
-                        }
+                    .then(async (track: LocalVideoTrack) => {
                         localParticipant?.publishTrack(track, { priority: 'low' })
                     })
                     .catch(onError)
-                    .finally(() => setIspublishing(false));
+                    .finally(() => {
+                        updateBackgroundSettings(backgroundSettings, false, true);
+                        setIspublishing(false);
+                    });
             }
         }
-    }, [videoTrack, localParticipant, getLocalVideoTrack, isPublishing, onError, removeLocalVideoTrack]);
+    }, [videoTrack, 
+        localParticipant, 
+        getLocalVideoTrack, 
+        isPublishing, 
+        onError, 
+        removeLocalVideoTrack, 
+        backgroundSettings,
+        updateBackgroundSettings,]);
 
     return [!!videoTrack, toggleVideoEnabled] as const;
 }

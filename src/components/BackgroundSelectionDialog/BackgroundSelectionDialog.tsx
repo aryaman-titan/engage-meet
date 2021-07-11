@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 function BackgroundSelectionDialog() {
   const classes = useStyles();
   const { isBackgroundSelectionOpen, setIsBackgroundSelectionOpen } = useVideoContext();
+  
 
   const imageNames = backgroundConfig.imageNames;
   const images = backgroundConfig.images;
