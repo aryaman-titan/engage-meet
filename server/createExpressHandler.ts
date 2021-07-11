@@ -18,7 +18,7 @@ const context: ServerlessContext = {
   ACCOUNT_SID: TWILIO_ACCOUNT_SID,
   TWILIO_API_KEY_SID,
   TWILIO_API_KEY_SECRET,
-  ROOM_TYPE: 'go', // change to group in production
+  ROOM_TYPE: 'group', // change to group in production
   CONVERSATIONS_SERVICE_SID: TWILIO_CONVERSATIONS_SERVICE_SID,
   getTwilioClient: () => twilioClient,
 };
