@@ -25,7 +25,10 @@ export default function ToggleVideoButton(props: { disabled?: boolean; className
     }
   }, [toggleVideoEnabled]);
 
-  useHotkeys('ctrl+e', () => toggleVideoButtonRef.current?.click());
+  useHotkeys('ctrl+e', (e) => {
+    e.preventDefault();
+    toggleVideoButtonRef.current?.click()
+  });
 
   return (
     <Button

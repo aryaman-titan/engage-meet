@@ -1,6 +1,6 @@
 import { Room } from 'twilio-video';
 import { useCallback, useState } from 'react';
-import { GaussianBlurBackgroundProcessor } from '@twilio/video-processors';
+import { GaussianBlurBackgroundProcessor, VirtualBackgroundProcessor } from '@twilio/video-processors';
 
 import SanFranciscoThumb from '../../../images/thumb/SanFrancisco.jpg';
 
@@ -32,6 +32,7 @@ const bgLibSettings = {
 const BG_SETTINGS_KEY = 'bgsettings5';
 
 let blurProcessor: GaussianBlurBackgroundProcessor;
+let virtualBackgroundProcessor: VirtualBackgroundProcessor;
 
 export default function useBackgroundSettings(room: Room | undefined | null) {
 
@@ -79,10 +80,14 @@ export default function useBackgroundSettings(room: Room | undefined | null) {
                     }
                     videoTrack.addProcessor(blurProcessor);
                 } else {
-                    // TODO currently just removes processor, implement background image replacement logic
+                    let bgImage = new Image();
+                    bgImage.src = SanFranciscoThumb;
+                    virtualBackgroundProcessor = new VirtualBackgroundProcessor({ ...bgLibSettings, backgroundImage: bgImage })
+                    await virtualBackgroundProcessor.loadModel();
                     if (videoTrack.processor) {
                         videoTrack.removeProcessor(videoTrack.processor);
                     }
+                    videoTrack.addProcessor(virtualBackgroundProcessor);
                 }
             }
             updateSettings(settings);
