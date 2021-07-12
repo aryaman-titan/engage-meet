@@ -34,7 +34,7 @@ export default function ToggleScreenShareButton(props: { disabled?: boolean }) {
   const isScreenShareSupported = navigator.mediaDevices && navigator.mediaDevices.getDisplayMedia;
   const isDisabled = props.disabled || disableScreenShareButton || !isScreenShareSupported;
 
-  let tooltipMessage = '';
+  let tooltipMessage = 'Toggle Share Screen';
 
   if (disableScreenShareButton) {
     tooltipMessage = SHARE_IN_PROGRESS_TEXT;

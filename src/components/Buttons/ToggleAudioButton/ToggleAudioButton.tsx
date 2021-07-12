@@ -3,6 +3,7 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import MicIcon from '../../../icons/MicIcon';
 import MicOffIcon from '../../../icons/MicOffIcon';
+import Tooltip from '@material-ui/core/Tooltip';
 
 import useLocalAudioToggle from '../../../hooks/useLocalAudioToggle/useLocalAudioToggle';
 import useVideoContext from '../../../hooks/useVideoContext/useVideoContext';
@@ -17,13 +18,15 @@ export default function ToggleAudioButton(props: { disabled?: boolean; className
     useHotkeys('ctrl+d', toggleAudioEnabled);
 
     return (
-        <Button
-            className={props.className}
-            onClick={toggleAudioEnabled}
-            disabled={!hasAudioTrack || props.disabled}
-            startIcon={isAudioEnabled ? <MicIcon /> : <MicOffIcon />}
-        >
-            {!hasAudioTrack ? 'No Audio' : isAudioEnabled ? 'Mute' : 'Unmute'}
-        </Button>
+        <Tooltip title="Toggle Audio (Ctrl+D)">
+            <Button
+                className={props.className}
+                onClick={toggleAudioEnabled}
+                disabled={!hasAudioTrack || props.disabled}
+                startIcon={isAudioEnabled ? <MicIcon /> : <MicOffIcon />}
+            >
+                {!hasAudioTrack ? 'No Audio' : isAudioEnabled ? 'Mute' : 'Unmute'}
+            </Button>
+        </Tooltip>
     );
 }
