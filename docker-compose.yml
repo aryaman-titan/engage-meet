@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+    api:
+      build: ./services/api
+      ports:
+        - "8080:8080"
+      container_name: engage-api
+      
+    client:
+      build: ./services/client
+      ports:
+        - "80:80"
+      container_name: engage-client
