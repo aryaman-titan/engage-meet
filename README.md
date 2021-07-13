@@ -1,4 +1,9 @@
 # Engage Meet 
+![Deploy Status](https://github.com/aryaman-titan/engage-meet/actions/workflows/main.yml/badge.svg)
+
+
+<img src="https://img.shields.io/badge/react%20-%2320232a.svg?&style=for-the-badge&logo=react&logoColor=%2361DAFB"/><img src="https://img.shields.io/badge/typescript%20-%23007ACC.svg?&style=for-the-badge&logo=typescript&logoColor=white"/>
+
 > A cross-platform video calling software developed with react-typescript, material UI and express backend    
 
 ## Features
