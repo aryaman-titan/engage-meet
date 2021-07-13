@@ -66,9 +66,7 @@ The Video app has the following features:
 - Flexible Configuration:
 
 ![Flexible Configuration](./images/flexible_config.png "Flexible Configuration")
-<hr>
-Application of Agile Methodology
---------------------------------
+## Application of Agile Methodology
 <br>
 Microsoft and the Acehacker team kept various sessions for us to learn more about the work culture at Microsoft. We also learned about new technologies that have been developed by Microsoft and about the Agile Methodology. <br><br>
 
