@@ -40,7 +40,33 @@ The Video app has the following features:
 - [x] File-sharing with various media types
 - [x] Background blur
 - [x] Custom virtual background of your choice 
+<br>
+### Demo
 
+- Homescreen:
+
+![Homescreen](./images/homescreen.png "Homescreen")
+
+- Preview screen:
+
+![Homescreen](./images/preview_screen.png "Preview Screen")
+
+- Video Call:
+
+![Homescreen](./images/video_app.png "Video Call")
+
+- Virtual Background:
+
+![Virtual Background](./images/virtual_bg.png "Virtual Background")
+
+- Quick Chat:
+
+![Quick Chat](./images/quick_chat.png "Quick Chat")
+
+- Flexible Configuration:
+
+![Flexible Configuration](./images/flexible_config.png "Flexible Configuration")
+<hr>
 Application of Agile Methodology
 --------------------------------
 <br>
