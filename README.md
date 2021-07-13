@@ -86,8 +86,22 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.\
 The app is ready to be deployed!
 
+## To run the app in Docker
 
+This project comes **Docker ready** out of the box. [Docker](https://www.docker.com/)
+is a software container platform. A Docker image contains information on everything
+required to make an app run. This self-contained system makes it extremely easy to
+ensure that your app runs on any OS without worrying about the dependency compatibility.
 
+Regardless of where it’s deployed, _your app will always run the same_ as long as
+Docker is installed on the machine.
+
+1. Install Docker: https://docs.docker.com/engine/installation/
+
+2. Clone the repo and move into the directory (see above)
+```bash
+$ docker-compose up -d
+```
 Future Possible Functionalities
 -------------------------------
 
