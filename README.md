@@ -40,7 +40,7 @@ The Video app has the following features:
 - [x] File-sharing with various media types
 - [x] Background blur
 - [x] Custom virtual background of your choice 
-<br>
+
 ### Demo
 
 - Homescreen:
